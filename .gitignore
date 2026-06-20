@@ -1,0 +1,29 @@
+# Configurações de Credenciais e Segurança
+.env
+.env.*
+
+# Ambiente Virtual (Venv)
+venv/
+.venv/
+env/
+ENV/
+
+# Arquivos Temporários do Bot / Imagens de Saída
+screenshot_temp.png
+*.log
+
+# Caches do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Configurações de IDEs (VS Code / PyCharm)
+.vscode/
+.idea/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
