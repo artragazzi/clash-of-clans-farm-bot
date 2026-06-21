@@ -31,8 +31,24 @@ LOCAL_OBS5 = os.path.join("images","obs_5.png")
 
 #Ataque
 SELECAO_GUARDIAO = os.path.join("images","guardiao.png")
-SELECAO_ELETRICO = os.path.join("images","dg_eletrico.png")
+SELECAO_TROPA = os.path.join("images","tropa.png")
 FINALIZAR_ATAQUE = os.path.join("images","finalizar_ataque.png")
+SELECAO_SERVO = os.path.join("images","servo.png")
+SELECAO_CAMPEA = os.path.join("images","campea.png")
+
+#SAZONAL
+SELECAO_SAZONAL1 = os.path.join("images","sazona1.png")
+SELECAO_SAZONAL2 = os.path.join("images","sazona2.png")
+
+
+#Muros
+MURO_ESCOLHIDO = os.path.join("images","muro.png")
+MURO_ESCOLHIDO_MELHORAR_OURO = os.path.join("images","muro_melhorar_ouro.png")
+MURO_ESCOLHIDO_MELHORAR_ELIXIR = os.path.join("images","muro_melhorar_elixir.png")
+
+CONFIRMAR_MURO_ESCOLHIDO = os.path.join("images","confirmar_muro.png")
+
+
 
 
 
@@ -46,7 +62,7 @@ def clicar_para_atacar():
             if coordernada_botao_atacar is not None:
                 print(f"Imagens botões iniciar ataque encontrados: {coordernada_botao_atacar}")
                 #Mover para botao de atacar
-                pyautogui.moveTo(coordernada_botao_atacar, duration=0.5)
+                pyautogui.moveTo(coordernada_botao_atacar, duration=0.2)
                 pyautogui.click()
                 time.sleep(1)
                 break # Sai do loop e vai para o próximo passo
@@ -67,7 +83,7 @@ def clicar_para_atacar():
             coordernada_botao_procurar_partida = pyautogui.locateCenterOnScreen(BOTAO_PROCURAR_PARTIDA, confidence=0.8)
             if coordernada_botao_procurar_partida is not None:
                 print(f"Imagens botões buscar partida encontrados: {coordernada_botao_procurar_partida}")
-                pyautogui.moveTo(coordernada_botao_procurar_partida, duration=0.5)
+                pyautogui.moveTo(coordernada_botao_procurar_partida, duration=0.2)
                 pyautogui.click()
                 time.sleep(1)
                 break # Sai do loop e vai para o próximo passo
@@ -89,7 +105,7 @@ def clicar_para_atacar():
             coordernada_botao_iniciar_ataque = pyautogui.locateCenterOnScreen(BOTAO_INICIAR_ATAQUE, confidence=0.8)
             if coordernada_botao_iniciar_ataque is not None:
                 print(f"Imagens botões buscar partida encontrados: {coordernada_botao_iniciar_ataque}")
-                pyautogui.moveTo(coordernada_botao_iniciar_ataque, duration=0.5)
+                pyautogui.moveTo(coordernada_botao_iniciar_ataque, duration=0.2)
                 pyautogui.click()
                 time.sleep(1)
                 break # Sai do loop e finaliza a função
@@ -135,7 +151,7 @@ def verifica_achou_vila():
     else:
         print("[!] Condições para ataque não atendidas. Pulando vila...")
         if coord_proxima is not None:
-            pyautogui.moveTo(coord_proxima, duration=0.5)
+            pyautogui.moveTo(coord_proxima, duration=0.2)
             pyautogui.click()
             print("[+] Clicou em Próxima Vila.")
             time.sleep(5) # Tempo essencial para aguardar o jogo carregar a próxima tela
@@ -157,18 +173,18 @@ def dropar_tropas():
     
     # 1. Tenta achar o Dragao Eletrico
     try:
-        coord_dg_eletrico = pyautogui.locateCenterOnScreen(SELECAO_ELETRICO, confidence=0.8)
+        coord_dg_eletrico = pyautogui.locateCenterOnScreen(SELECAO_TROPA, confidence=0.8)
     except (pyautogui.ImageNotFoundException, Exception):
-        print(f"[-] Imagem não encontrada: SELECAO_ELETRICO")
+        print(f"[-] Imagem não encontrada: SELECAO_TROPA")
     
     if coord_dg_eletrico is not None:
-        pyautogui.moveTo(coord_dg_eletrico, duration=0.5)
+        pyautogui.moveTo(coord_dg_eletrico, duration=0.2)
         pyautogui.click()
         print("[+] Clicou no Dragao Eletrico.")
         
-        time.sleep(0.5)
+        time.sleep(0.2)
         
-        pyautogui.moveTo(280,480, duration=0.5)
+        pyautogui.moveTo(260,480, duration=0.2)
         pyautogui.mouseDown()
         time.sleep(3)
         pyautogui.mouseUp()
@@ -176,22 +192,96 @@ def dropar_tropas():
         
     #Seleção e drop guardiao e lança
     
-    # 2. Tenta achar o Dragao Eletrico
+    # 2. Tenta achar a tropa
     try:
         coord_guardiao = pyautogui.locateCenterOnScreen(SELECAO_GUARDIAO, confidence=0.8)
     except (pyautogui.ImageNotFoundException, Exception):
         print(f"[-] Imagem não encontrada: SELECAO_GUARDIAO")
     
     if coord_guardiao is not None:
-        pyautogui.moveTo(coord_guardiao, duration=0.5)
+        pyautogui.moveTo(coord_guardiao, duration=0.2)
         pyautogui.click()
         print("[+] Clicou no Guardiao.")
         
-        time.sleep(0.5)
+        time.sleep(0.2)
         
-        pyautogui.moveTo(280,480, duration=0.5)
+        pyautogui.moveTo(260,480, duration=0.2)
         pyautogui.mouseDown()
         time.sleep(2)
+        pyautogui.mouseUp()
+        
+         # 3. Tenta achar o Servo
+    try:
+        coord_servo = pyautogui.locateCenterOnScreen(SELECAO_SERVO, confidence=0.8)
+    except (pyautogui.ImageNotFoundException, Exception):
+        print(f"[-] Imagem não encontrada: SELECAO_SERVO")
+    
+    if coord_servo is not None:
+        pyautogui.moveTo(coord_servo, duration=0.2)
+        pyautogui.click()
+        print("[+] Clicou no Servo.")
+        
+        time.sleep(0.2)
+        
+        pyautogui.moveTo(260,480, duration=0.2)
+        pyautogui.mouseDown()
+        time.sleep(2)
+        pyautogui.mouseUp()
+    
+    
+         # 4. Tenta achar o Campea
+    try:
+        coord_campea = pyautogui.locateCenterOnScreen(SELECAO_CAMPEA, confidence=0.8)
+    except (pyautogui.ImageNotFoundException, Exception):
+        print(f"[-] Imagem não encontrada: SELECAO_SERVO")
+    
+    if coord_campea is not None:
+        pyautogui.moveTo(coord_campea, duration=0.2)
+        pyautogui.click()
+        print("[+] Clicou no Servo.")
+        
+        time.sleep(0.2)
+        
+        pyautogui.moveTo(260,480, duration=0.2)
+        pyautogui.mouseDown()
+        time.sleep(2)
+        pyautogui.mouseUp()
+        
+        
+           # 5. Tenta achar o sazonal1
+    try:
+        coord_sazonal1 = pyautogui.locateCenterOnScreen(SELECAO_SAZONAL1, confidence=0.8)
+    except (pyautogui.ImageNotFoundException, Exception):
+        print(f"[-] Imagem não encontrada: SELECAO_SERVO")
+    
+    if coord_sazonal1 is not None:
+        pyautogui.moveTo(coord_sazonal1, duration=0.2)
+        pyautogui.click()
+        print("[+] Clicou no Servo.")
+        
+        time.sleep(0.2)
+        
+        pyautogui.moveTo(260,480, duration=0.2)
+        pyautogui.mouseDown()
+        time.sleep(9)
+        pyautogui.mouseUp()
+        
+               # 6. Tenta achar o sazonal2
+    try:
+        coord_sazonal2 = pyautogui.locateCenterOnScreen(SELECAO_SAZONAL2, confidence=0.8)
+    except (pyautogui.ImageNotFoundException, Exception):
+        print(f"[-] Imagem não encontrada: SELECAO_SERVO")
+    
+    if coord_sazonal2 is not None:
+        pyautogui.moveTo(coord_sazonal2, duration=0.2)
+        pyautogui.click()
+        print("[+] Clicou no Servo.")
+        
+        time.sleep(0.2)
+        
+        pyautogui.moveTo(260,480, duration=0.2)
+        pyautogui.mouseDown()
+        time.sleep(9)
         pyautogui.mouseUp()
         
 
@@ -206,7 +296,7 @@ def monitorar_ataque():
         try:
             coord_finalizar = pyautogui.locateCenterOnScreen(FINALIZAR_ATAQUE, confidence=0.8)
             if coord_finalizar is not None:
-                pyautogui.moveTo(coord_finalizar, duration=0.5)
+                pyautogui.moveTo(coord_finalizar, duration=0.2)
                 pyautogui.click()
                 print("[+] Botão de finalizar encontrado! Ataque encerrado.")
                 return True # Sai da função com sucesso
@@ -286,6 +376,91 @@ def verificar_comandos_telegram():
         # Se der erro de internet ou API, ignora para não travar o bot
         pass
 
+
+def upar_muro():
+    print("Upando muro...")
+    time.sleep(1)
+    
+    # Selecionando o Muro
+    try:
+        coord_muro = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO, confidence=0.8)
+        if coord_muro is not None:
+            print(f"Muro encontrado: {coord_muro}")
+            # Mover para muro
+            pyautogui.moveTo(coord_muro, duration=0.2)
+            pyautogui.click()
+            time.sleep(0.2)
+                            
+        else:
+            print("Não consegui achar a imagem do muro... Seguindo o fluxo.")
+            return # Sai da função imediatamente e segue o jogo
+    except pyautogui.ImageNotFoundException:
+        print("Erro: Arquivo de imagem Muro não foi localizado ou formato incompatível. Seguindo o fluxo...")
+        return # Sai da função imediatamente e segue o jogo
+    except Exception as e:
+        print(f"Ocorreu um erro inesperado: {e}")
+        return # Sai da função imediatamente e segue o jogo
+    
+    # Escolhendo qual forma de upar
+    coord_mineiro_escolhido = None
+
+    # 1. Tenta achar o botão de ouro
+    try:
+        coord_melhorar_ouro = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO_MELHORAR_OURO, confidence=0.95)
+    except (pyautogui.ImageNotFoundException, Exception):
+        coord_melhorar_ouro = None
+
+    # 2. Tenta achar o botão de elixir
+    try:
+        coord_melhorar_elixir = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO_MELHORAR_ELIXIR, confidence=0.95)
+    except (pyautogui.ImageNotFoundException, Exception):
+        coord_melhorar_elixir = None
+
+
+    # --- Decisão de qual recurso usar ---
+    if coord_melhorar_ouro is not None:
+        coord_mineiro_escolhido = coord_melhorar_ouro
+        print(f"[+] Botão de OURO encontrado! Usando coordenada: {coord_mineiro_escolhido}")
+        
+    elif coord_melhorar_elixir is not None:
+        coord_mineiro_escolhido = coord_melhorar_elixir
+        print(f"[+] Botão de ELIXIR encontrado! Usando coordenada: {coord_mineiro_escolhido}")
+        
+    else:
+        print("[-] Não encontrei nenhum dos dois botões de melhoria (Ouro ou Elixir). Seguindo o fluxo.")
+        # Se abriu o muro mas não achou os botões, não há o que clicar. Apenas sai da função.
+        return 
+
+
+    # --- Executa o clique final se algum foi escolhido ---
+    if coord_mineiro_escolhido is not None:
+        pyautogui.moveTo(coord_mineiro_escolhido, duration=0.2)
+        pyautogui.click()
+        print("[+] Muro indo para confirmação!")
+        time.sleep(0.2)
+        
+    
+    # Selecionando confirmação
+    try:
+        coord_confirmar_muro = pyautogui.locateCenterOnScreen(CONFIRMAR_MURO_ESCOLHIDO, confidence=0.70)
+        # CORREÇÃO: Validando a variável correta da confirmação
+        if coord_confirmar_muro is not None:
+            print(f"Confirmação achada: {coord_confirmar_muro}")
+            # Mover para botao de confirmação
+            pyautogui.moveTo(coord_confirmar_muro, duration=0.2)
+            pyautogui.click()
+            time.sleep(0.2)
+                            
+        else:
+            print("Não consegui achar a imagem de confirmação do muro... Seguindo o fluxo.")
+            time.sleep(1)
+    except pyautogui.ImageNotFoundException:
+        print("Erro: Arquivo de imagem de confirmação Muro não foi localizado ou formato incompatível. Seguindo o fluxo...")
+        time.sleep(1)
+    except Exception as e:
+        print(f"Ocorreu um erro inesperado: {e}")
+        time.sleep(1)
+      
         
 if __name__ == "__main__":
     
@@ -307,10 +482,11 @@ if __name__ == "__main__":
         
         # Soma 1 ao contador toda vez que um ataque termina
         contador_envio_imagem += 1
+        upar_muro() # Executa a tentativa de upgrade de muro com retornos seguros
         
-        # Envia imagem a cada 3 ataques
-        if contador_envio_imagem >= 3:
-            time.sleep(4)
+        # Envia imagem a cada 1 ataque (conforme seu código atual)
+        if contador_envio_imagem >= 2:
+            time.sleep(1)
             enviar_captura()
             contador_envio_imagem = 0
             
