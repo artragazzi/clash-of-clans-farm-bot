@@ -36,11 +36,6 @@ FINALIZAR_ATAQUE = os.path.join("images","finalizar_ataque.png")
 SELECAO_SERVO = os.path.join("images","servo.png")
 SELECAO_CAMPEA = os.path.join("images","campea.png")
 
-#SAZONAL
-SELECAO_SAZONAL1 = os.path.join("images","sazona1.png")
-SELECAO_SAZONAL2 = os.path.join("images","sazona2.png")
-
-
 #Muros
 MURO_ESCOLHIDO = os.path.join("images","muro.png")
 MURO_ESCOLHIDO_MELHORAR_OURO = os.path.join("images","muro_melhorar_ouro.png")
@@ -248,41 +243,6 @@ def dropar_tropas():
         pyautogui.mouseUp()
         
         
-           # 5. Tenta achar o sazonal1
-    try:
-        coord_sazonal1 = pyautogui.locateCenterOnScreen(SELECAO_SAZONAL1, confidence=0.8)
-    except (pyautogui.ImageNotFoundException, Exception):
-        print(f"[-] Imagem não encontrada: SELECAO_SERVO")
-    
-    if coord_sazonal1 is not None:
-        pyautogui.moveTo(coord_sazonal1, duration=0.2)
-        pyautogui.click()
-        print("[+] Clicou no Servo.")
-        
-        time.sleep(0.2)
-        
-        pyautogui.moveTo(260,480, duration=0.2)
-        pyautogui.mouseDown()
-        time.sleep(9)
-        pyautogui.mouseUp()
-        
-               # 6. Tenta achar o sazonal2
-    try:
-        coord_sazonal2 = pyautogui.locateCenterOnScreen(SELECAO_SAZONAL2, confidence=0.8)
-    except (pyautogui.ImageNotFoundException, Exception):
-        print(f"[-] Imagem não encontrada: SELECAO_SERVO")
-    
-    if coord_sazonal2 is not None:
-        pyautogui.moveTo(coord_sazonal2, duration=0.2)
-        pyautogui.click()
-        print("[+] Clicou no Servo.")
-        
-        time.sleep(0.2)
-        
-        pyautogui.moveTo(260,480, duration=0.2)
-        pyautogui.mouseDown()
-        time.sleep(9)
-        pyautogui.mouseUp()
         
 
 def monitorar_ataque():
@@ -299,6 +259,7 @@ def monitorar_ataque():
                 pyautogui.moveTo(coord_finalizar, duration=0.2)
                 pyautogui.click()
                 print("[+] Botão de finalizar encontrado! Ataque encerrado.")
+                time.sleep(1)
                 return True # Sai da função com sucesso
         except (pyautogui.ImageNotFoundException, Exception):
             # Ocultamos ou simplificamos o print para não poluir o terminal a cada 2 segundos
@@ -379,11 +340,11 @@ def verificar_comandos_telegram():
 
 def upar_muro():
     print("Upando muro...")
-    time.sleep(1)
+    time.sleep(2)
     
     # Selecionando o Muro
     try:
-        coord_muro = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO, confidence=0.8)
+        coord_muro = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO, confidence=0.9)
         if coord_muro is not None:
             print(f"Muro encontrado: {coord_muro}")
             # Mover para muro
@@ -406,13 +367,13 @@ def upar_muro():
 
     # 1. Tenta achar o botão de ouro
     try:
-        coord_melhorar_ouro = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO_MELHORAR_OURO, confidence=0.95)
+        coord_melhorar_ouro = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO_MELHORAR_OURO, confidence=0.91)
     except (pyautogui.ImageNotFoundException, Exception):
         coord_melhorar_ouro = None
 
     # 2. Tenta achar o botão de elixir
     try:
-        coord_melhorar_elixir = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO_MELHORAR_ELIXIR, confidence=0.95)
+        coord_melhorar_elixir = pyautogui.locateCenterOnScreen(MURO_ESCOLHIDO_MELHORAR_ELIXIR, confidence=0.91)
     except (pyautogui.ImageNotFoundException, Exception):
         coord_melhorar_elixir = None
 
@@ -482,6 +443,7 @@ if __name__ == "__main__":
         
         # Soma 1 ao contador toda vez que um ataque termina
         contador_envio_imagem += 1
+        time.sleep(3)
         upar_muro() # Executa a tentativa de upgrade de muro com retornos seguros
         
         # Envia imagem a cada 1 ataque (conforme seu código atual)
