@@ -33,8 +33,11 @@ LOCAL_OBS5 = os.path.join("images","obs_5.png")
 SELECAO_GUARDIAO = os.path.join("images","guardiao.png")
 SELECAO_TROPA = os.path.join("images","tropa.png")
 FINALIZAR_ATAQUE = os.path.join("images","finalizar_ataque.png")
+
+SELECAO_REI = os.path.join("images","rei.png")
 SELECAO_SERVO = os.path.join("images","servo.png")
 SELECAO_CAMPEA = os.path.join("images","campea.png")
+SELECAO_RAINHA = os.path.join("images","rainha.png")
 
 #Muros
 MURO_ESCOLHIDO = os.path.join("images","muro.png")
@@ -225,15 +228,51 @@ def dropar_tropas():
     
     
          # 4. Tenta achar o Campea
+#    try:
+#        coord_campea = pyautogui.locateCenterOnScreen(SELECAO_CAMPEA, confidence=0.8)
+#    except (pyautogui.ImageNotFoundException, Exception):
+#        print(f"[-] Imagem não encontrada: SELECAO_SERVO")
+#    
+#    if coord_campea is not None:
+#        pyautogui.moveTo(coord_campea, duration=0.2)
+#        pyautogui.click()
+#        print("[+] Clicou no Servo.")
+#        
+#        time.sleep(0.2)
+#        
+#        pyautogui.moveTo(260,480, duration=0.2)
+#        pyautogui.mouseDown()
+#        time.sleep(2)
+#        pyautogui.mouseUp()
+
+   # 5. Tenta achar o Rainha
     try:
-        coord_campea = pyautogui.locateCenterOnScreen(SELECAO_CAMPEA, confidence=0.8)
+        coord_queen = pyautogui.locateCenterOnScreen(SELECAO_RAINHA, confidence=0.8)
     except (pyautogui.ImageNotFoundException, Exception):
         print(f"[-] Imagem não encontrada: SELECAO_SERVO")
     
-    if coord_campea is not None:
-        pyautogui.moveTo(coord_campea, duration=0.2)
+    if coord_queen is not None:
+        pyautogui.moveTo(coord_queen, duration=0.2)
         pyautogui.click()
         print("[+] Clicou no Servo.")
+        
+        time.sleep(0.2)
+        
+        pyautogui.moveTo(260,480, duration=0.2)
+        pyautogui.mouseDown()
+        time.sleep(2)
+        pyautogui.mouseUp()
+    
+    # 6. Tenta achar o Rei
+    try:
+        coord_king = pyautogui.locateCenterOnScreen(SELECAO_REI, confidence=0.8)
+    except (pyautogui.ImageNotFoundException, Exception):
+        print(f"[-] Imagem não encontrada: SELECAO_REI")
+    
+    if coord_king is not None:
+        pyautogui.moveTo(coord_king, duration=0.2)
+        pyautogui.click()
+        print("[+] Clicou no REI.")
         
         time.sleep(0.2)
         
@@ -447,7 +486,7 @@ if __name__ == "__main__":
         upar_muro() # Executa a tentativa de upgrade de muro com retornos seguros
         
         # Envia imagem a cada 1 ataque (conforme seu código atual)
-        if contador_envio_imagem >= 2:
+        if contador_envio_imagem >= 4:
             time.sleep(1)
             enviar_captura()
             contador_envio_imagem = 0
